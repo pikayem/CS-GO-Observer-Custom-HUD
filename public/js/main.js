@@ -9,25 +9,56 @@ function loadTeams(cb){
     $.get("/api/teams", function(data){
         let teamsArray = data.teams;
         let teams = {};
-        
+
         teamsArray.forEach(function(team) {
             teams[team._id] = team;
         }, this);
-        loadPlayers(cb, teams);
+        loadPlaces(cb, teams);
     });
 }
 
-function loadPlayers(cb, teams){
+//get place-data from pkm-server
+function loadPlaces(cb, teams){
+    $.get('http://' + ip + ':1999/players', function(data){
+        let places = {};
+
+        var myObj = JSON.parse(data);
+        //console.log (myObj);
+        for (x in myObj) {
+          console.log (myObj[x]["place"]);
+          places[x] = myObj[x]["place"]
+
+        }
+
+        loadPlayers(cb, teams, places);
+    });
+
+}
+
+function loadPlayers(cb, teams, places){
     $.get("/api/players", function(data){
         let playersArray = data.players;
         let players = {};
 
         playersArray.forEach(function(player) {
+
+            //check if there is match in pkm data and current id
+            if (places[player.sid]) {
+              console.log ("löytyi " + player.sid + places[player.sid]);
+              player.place = places[player.sid]
+            } else {
+              console.log ("ei löydy" + player.sid );
+              player.place = "0";
+            }
+
             players[player.sid] = player;
         }, this);
         cb(players, teams);
     });
 }
+
+
+
 function loadAvatar(steamid, callback) {
     if(!avatars[steamid]){
         $.get("/av/" + steamid, function () {
@@ -85,10 +116,10 @@ $(document).ready(function () {
             };
 
             if(!this.info.map || !this.info.map.team_ct) return false;
-            
+
             ret = $.extend({}, ret, this.info.map.team_ct);
 
-            if (!ret.name) 
+            if (!ret.name)
                 ret.name = "Counter-terrorists";
             for (let sid in this.getPlayers()) {
                 let player = this.getPlayers()[sid];
@@ -118,7 +149,7 @@ $(document).ready(function () {
 
             ret = $.extend({}, ret, this.info.map.team_t);
 
-            if (!ret.name) 
+            if (!ret.name)
                 ret.name = "Terrorists";
             for (let sid in this.getPlayers()) {
                 let player = this.getPlayers()[sid];
@@ -144,7 +175,7 @@ $(document).ready(function () {
             for(var k in players){
                 if(players[k].steamid == steamid) return players[k];
             }
-            
+
             return false;
 
         },
@@ -156,7 +187,7 @@ $(document).ready(function () {
         phase: function () {
             if (!this.info.phase_countdowns) return false;
             return this.info.phase_countdowns;
-            
+
         },
         round: function () {
             if (!this.info.round) return false;
@@ -165,12 +196,12 @@ $(document).ready(function () {
         map: function () {
             if (!this.info.map)  return false;
             return this.info.map;
-            
+
         },
         previously: function () {
             if (!this.info.previously) return false;
             return this.info.previously;
-            
+
         }
     };
     var integ = {
@@ -207,6 +238,10 @@ $(document).ready(function () {
                     }
                     if (players_data[steamid] && players_data[steamid].team) {
                         slotted[slot].teamData = integ.loadTeam(players_data[steamid].team);
+                    }
+                    //paikkatieto mukaan
+                    if (players_data[steamid] && players_data[steamid].place) {
+                        slotted[slot].place = players_data[steamid].place;
                     }
                     integ.getPlayers()[k].getState = function () {
                         return this.state;
