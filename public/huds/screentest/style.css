@@ -10,12 +10,12 @@
 		background-color: rgba(0, 0, 0, 0);
 	}
 
-	#left>#player1 {
+	#left>#player5 {
 		position: absolute;
 		top: 400px;
 		left: 0px;
 	}
-	#left>#player2 {
+	#left>#player4 {
 		position: absolute;
 		top: 400px;
 		left: 384px;
@@ -25,22 +25,22 @@
 		top: 400px;
 		left: 768px;
 	}
-	#left>#player4 {
+	#left>#player2 {
 		position: absolute;
 		top: 400px;
 		left: 1152px;
 	}
-	#left>#player5 {
+	#left>#player1 {
 		position: absolute;
 		top: 400px;
 		left: 1536px;
 	}
-	#right>#player1 {
+	#right>#player5 {
 		position: absolute;
 		bottom: 100px;
 		left: 0px;
 	}
-	#right>#player2 {
+	#right>#player4 {
 		position: absolute;
 		bottom: 100px;
 		left: 384px;
@@ -50,12 +50,12 @@
 		bottom: 100px;
 		left: 768px;
 	}
-	#right>#player4 {
+	#right>#player2 {
 		position: absolute;
 		bottom: 100px;
 		left: 1152px;
 	}
-	#right>#player5 {
+	#right>#player1 {
 		position: absolute;
 		bottom: 100px;
 		left: 1536px;
@@ -101,7 +101,7 @@
 
 
 	.team {
-		width: 410px;
+		width: 380px;
 		height: 420px;
 	}
 
@@ -260,13 +260,13 @@
 
 	.player {
 		background-color: rgba(0, 0, 0, 0.65);
-		width: 410px; /* oli 410 voisi olla 380 ? */
+		width: 380px; /* oli 410 voisi olla 380 ? */
 		height: 63px;
 		margin-bottom: 4px;
 	}
 
 	.bar1 {
-		width: 100%;
+		width: auto;
 		height: 36px;
 		font-size: 25px;
 		font-weight: bold;
@@ -278,7 +278,7 @@
 	}
 
 	#left>.player>.bar1>.hp_bar {
-		width: 295px;
+		width: 265px;
 		background: #5788a8;
 		height: 100%;
 		float: left;
@@ -287,7 +287,7 @@
 	}
 
 	#right>.player>.bar1>.hp_bar {
-		width: 295px;
+		width: 265px;
 		background: #c19511;
 		height: 100%;
 		float: right;
@@ -319,10 +319,10 @@
 		background: linear-gradient(to left, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.3));
 	}
 	#left > .player{
-		background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.0) 295px);
+		background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 265px, rgba(0, 0, 0, 0.0) 255px);
 	}
 	#right > .player{
-		background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 295px, rgba(0, 0, 0, 0.0) 295px);
+		background: linear-gradient(to left, rgba(0, 0, 0, 0.65) 265px, rgba(0, 0, 0, 0.0) 265px);
 	}
 
 	.bar1>.stat_t {
@@ -360,7 +360,7 @@
 	#left>.player>.bar1>.hp_bar>.bar_username {
 		float: left;
 		padding-left: 15px;
-		width: 120px;
+		width: 100px;
 		overflow: hidden;
 		white-space: nowrap;
 		font-size:20px;
@@ -371,7 +371,7 @@
 		float: right;
 		text-align:right;
 		padding-right: 15px;
-		width: 120px;
+		width: 100px;
 		overflow: hidden;
 		white-space: nowrap;
 		font-size:20px;
@@ -381,25 +381,25 @@
 	#left>.player>.bar1>.hp_bar>.bar_weapon,
 	#left>.player>.bottom_bar>.equip_bar>.bar_weapon {
 		float: right;
-		width: 120px;
+		width: 100px;
 		height: 100%;
 	}
 
 	#right>.player>.bar1>.hp_bar>.bar_weapon,
 	#right>.player>.bottom_bar>.equip_bar>.bar_weapon {
 		float: left;
-		width: 120px;
+		width: 100px;
 		height: 100%;
 	}
 
 	#left>.player>.bottom_bar>.equip_bar {
-		width: 295px;
+		width: 265px;
 		height: 100%;
 		float: left;
 	}
 
 	#right>.player>.bottom_bar>.equip_bar {
-		width: 295px;
+		width: 265px;
 		height: 100%;
 		float: right;
 	}
@@ -834,7 +834,7 @@
 
 
 	.equip_bar>.bar_weapon{
-		width:165px !important;
+		width:135px !important;
 	}
 
 

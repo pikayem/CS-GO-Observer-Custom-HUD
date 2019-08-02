@@ -1,5 +1,5 @@
 
-var io = io('http://' + ip + ':' + port + '/');
+var io = io('http://' + '127.0.0.1' + ':' + port + '/'); //ip where server is running
 var avatars = {};
 function load(cb){
     loadTeams(cb);
@@ -19,7 +19,8 @@ function loadTeams(cb){
 
 //get place-data from pkm-server
 function loadPlaces(cb, teams){
-    $.get('http://' + ip + ':1999/players', function(data){
+    // PKM-server ip, if not local
+    $.get('http://' + '127.0.0.1' + ':1999/players', function(data){
         let places = {};
 
         var myObj = JSON.parse(data);
